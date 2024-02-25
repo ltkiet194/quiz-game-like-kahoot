@@ -1,0 +1,172 @@
+{% extends 'shared/base.html' %} {% block title %} Room: {{roomCode}} {% endblock title %}
+{% block content %}
+    <section>
+    <div id="modal_overlay" class="absolute inset-0 z-50 flex items-start justify-center hidden w-full h-screen pt-64 bg-black bg-opacity-30 md:items-center md:pt-0">
+        <div id="modal" class="relative w-10/12 transition-opacity transition-transform duration-300 transform scale-150 -translate-y-full bg-white rounded shadow-lg pacity-0 md:w-fit h-1/4 md:h-fit">
+        <div class="w-full p-3 mt-2">
+            <div class="relative">
+                <input type="text" id="Displayname" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none
+                dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+                <label for="Displayname" class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0]
+                bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 
+                peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">Tên Hiển Thị</label>
+            </div>
+            <div class="relative bottom-0 flex items-center justify-end gap-3 px-4 py-3 mx-auto border-t border-gray-200">
+            <button class="px-4 py-2 text-white rounded bg-green hover:bg-green focus:outline-none" id="submitBtn">
+                OKE!
+            </button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+
+
+    <div id="root">
+        <div class="laptop:px-24 desktop:py-16 mobile:py-8 mobile:px-3 relative grid min-h-screen grid-rows-[auto_1fr] overflow-hidden px-56 py-32 font-rubik transition-all duration-300 bg-light-grey hidden" id="Quiz">
+            <main class="z-[2]">
+                <div>
+                <div class="grid grid-cols-2 gap-x-24 gap-y-12 desktop:grid-cols-1 desktop:gap-x-0">
+                    <div class="flex flex-col gap-11 desktop:pb-12 mobile:gap-5 mobile:pb-4">
+                <div class="flex items-center">
+                    <p class="text-[2rem] italic lead-[150%] transition-all thời lượng-300 mobile:text-[1.4rem] text-dark-navy">Câu hỏi 1 / 10</p>
+                    <div class="gap-8 pl-12 mt-auto">
+                        <div class="inline-flex w-24 p-2 mx-1 text-yellow-600 align-middle round-lg">
+                            <div class="font-mono text-[2rem] leading-none" x-text="seconds" id="countdown">50</div>
+                            <div class="font-mono text-[2rem] leading-none  pl-2">Giây</div>
+                        </div>
+                    </div>
+                </div>
+                    <h2 class="text-[1.6rem] font-medium leading-[120%] transition-all duration-300 mobile:text-[1rem] text-dark-navy">
+                        Con chó đen người ta gọi là con chó mực. Con chó vàng, người ta gọi là con chó phèn. Con chó sanh người ta gọi là con chó đẻ. Vậy con chó đỏ, người ta gọi là con chó gì?
+                    </h2>          
+                    </div>
+                    <div class="space-y-10 mobile:space-y-5 ">
+                        <button
+                            class="tablet:gap-4 mobile:rounded-[1.2rem] 
+                            mobile:text-[1.8rem] mobile:px-5 mobile:py-4 
+                            group flex w-full items-center gap-12 rounded-[1.4rem] 
+                            border-[3px] px-4 py-1 text-[2.8rem] font-medium leading-[100%]
+                            text-grey-navy shadow-sm transition-all duration-300 border-transparent hover:border-purple bg-white"
+                            id="quiz-button">
+                            <span class="inline-block rounded px-5 py-2 transition-all duration-300 bg-light-grey group-hover:bg-[#f6e7ff] group-hover:text-[#a729f5] text-[1rem]">A</span>
+                            <span class="transition-all duration-300 text-dark-navy text-[1rem]">Hyper Trainer Marking Language</span>
+                        </button>
+                        <button
+                            class="tablet:gap-4 mobile:rounded-[1.2rem] 
+                            mobile:text-[1.8rem] mobile:px-5 mobile:py-4 
+                            group flex w-full items-center gap-12 rounded-[1.4rem] 
+                            border-[3px] px-4 py-1 text-[2.8rem] font-medium leading-[100%]
+                            text-grey-navy shadow-sm transition-all duration-300 border-transparent hover:border-purple bg-white"
+                            id="quiz-button">
+                            <span class="inline-block rounded px-5 py-2 transition-all duration-300 bg-light-grey group-hover:bg-[#f6e7ff] group-hover:text-[#a729f5] text-[1rem]">B</span>
+                            <span class="transition-all duration-300 text-dark-navy text-[1rem]">Hyper Trainer Marking Language</span>
+                        </button>
+                        <button
+                            class="tablet:gap-4 mobile:rounded-[1.2rem] 
+                            mobile:text-[1.8rem] mobile:px-5 mobile:py-4 
+                            group flex w-full items-center gap-12 rounded-[1.4rem] 
+                            border-[3px] px-4 py-1 text-[2.8rem] font-medium leading-[100%]
+                            text-grey-navy shadow-sm transition-all duration-300 border-transparent hover:border-purple bg-white"
+                            id="quiz-button">
+                            <span class="inline-block rounded  px-5 py-2 transition-all duration-300 bg-light-grey group-hover:bg-[#f6e7ff] group-hover:text-[#a729f5] text-[1rem]">C</span>
+                            <span class="transition-all duration-300 text-dark-navy text-[1rem]">Hyper Trainer Marking Language</span>
+                            
+                        </button>
+                        <button
+                            class="tablet:gap-4 mobile:rounded-[1.2rem] 
+                            mobile:text-[1.8rem] mobile:px-5 mobile:py-4 
+                            group flex w-full items-center gap-12 rounded-[1.4rem] 
+                            border-[3px] px-4 py-1 text-[2.8rem] font-medium leading-[100%]
+                            text-grey-navy shadow-sm transition-all duration-300 border-transparent hover:border-purple bg-white"
+                            id="quiz-button">
+                            <span class="inline-block rounded  px-5 py-2 transition-all duration-300 bg-light-grey group-hover:bg-[#f6e7ff] group-hover:text-[#a729f5] text-[1rem]">D</span>
+                            <span class="transition-all duration-300 text-dark-navy text-[1rem]">Hyper Trainer Marking Language</span>
+                        </button>
+                    </div>
+                    <div class="col-start-2 desktop:col-start-1">
+                    </div>
+                </div>
+                </div>
+            </main>      
+        </div>
+        
+        <div class="w-full p-8 bg-white rounded-md">
+            <div class="flex items-center justify-between pb-6 ">    
+            </div>
+            <div>
+                <div class="px-4 py-4 -mx-4 overflow-x-auto sm:-mx-8 sm:px-8">
+                    <div class="inline-block min-w-full overflow-hidden rounded-lg shadow">
+                        <table class="min-w-full leading-normal">
+                            <thead>
+                                <tr>
+                                    <th class="px-5 py-3 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200">Name</th>
+                                    <th class="px-5 py-3 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200">Scores</th>
+                                    <th class="px-5 py-3 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="member">
+                                <tr class="hidden">
+                                    <td class="px-5 py-5 text-sm bg-white border-b border-gray-200">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0 w-10 h-10">
+                                                <img class="w-full h-full rounded-full"
+                                                    src="https://images.unsplash.com/photo-1540845511934-7721dd7adec3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80"
+                                                    alt="" />
+                                            </div>
+                                                <div class="ml-3">
+                                                    <p class="text-gray-900 whitespace-no-wrap">
+                                                        Dana Moore
+                                                    </p>
+                                                </div>
+                                            </div>
+                                    </td>
+                                    <td class="px-5 py-5 text-sm bg-white border-b border-gray-200">
+                                        <p class="text-gray-900 whitespace-no-wrap">Editor</p>
+                                    </td>
+                                    
+                                    <td class="px-5 py-5 text-sm bg-white border-b border-gray-200">
+                                        <span
+                                            class="relative inline-block px-3 py-1 font-semibold leading-tight text-orange-900">
+                                            <span aria-hidden
+                                                class="absolute inset-0 bg-orange-200 rounded-full opacity-50"></span>
+                                        <span class="relative">Suspded</span>
+                                        </span>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+    
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var dpname =""
+            $("#submitBtn").click(function () {
+                dpname = $("#Displayname").val();
+                setupSocket(dpname,'{{roomCode}}')
+            });
+        });  
+        
+        document.addEventListener("DOMContentLoaded", function() {
+            const buttonsAnswer = document.querySelectorAll("#quiz-button"); 
+            buttonsAnswer.forEach(function(button) {
+                button.addEventListener("click", function() {
+        
+                    buttonsAnswer.forEach(function(btn) {
+                        btn.classList.remove("bg-green");
+                    });
+                    this.classList.add("bg-green");
+                });
+            });
+        });
+    </script>
+    </section>
+
+{% endblock content %}

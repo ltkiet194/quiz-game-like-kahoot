@@ -1,0 +1,49 @@
+@keyframes shake {
+    0% {
+        @apply transform rotate-0 translate-x-1 translate-y-1;
+    }
+
+    10% {
+        @apply transform translate-x--1 translate-y--2 rotate--1;
+    }
+
+    20% {
+        @apply transform translate-y-0 translate-x--3 rotate-1;
+    }
+
+    30% {
+        @apply transform rotate-0 translate-x-3 translate-y-2;
+    }
+
+    40% {
+        @apply transform translate-x-1 translate-y--1 rotate-1;
+    }
+
+    50% {
+        @apply transform translate-y-2 translate-x--1 rotate--1;
+    }
+
+    60% {
+        @apply transform rotate-0 translate-y-1 translate-x--3;
+    }
+
+    70% {
+        @apply transform translate-x-3 translate-y-1 rotate--1;
+    }
+
+    80% {
+        @apply transform translate-x--1 translate-y--1 rotate-1;
+    }
+
+    90% {
+        @apply transform rotate-0 translate-x-1 translate-y-2;
+    }
+
+    100% {
+        @apply transform translate-x-1 translate-y--2 rotate--1;
+    }
+}
+
+.animate-shake {
+    @apply animation-shake;
+}

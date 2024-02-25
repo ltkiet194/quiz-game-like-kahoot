@@ -1,0 +1,33 @@
+
+
+{% extends 'shared/base_client.html' %}
+{% block title %} Sign Up {% endblock title %}
+{% block content %}
+
+<div class="container mx-auto mt-8">
+    <div class="max-w-md mx-auto overflow-hidden bg-white rounded-md shadow-md">
+        <div class="p-6">
+            <h1 class="mb-4 text-xl font-semibold">Create Quiz</h1>
+            <form action="{% url 'create_quizzes' %}" method="POST">
+                {% csrf_token %}
+                <div class="mb-4">
+                    <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                    <input type="text" name="name" id="name" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                </div>
+                <div class="mb-4">
+                    <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+                    <textarea name="description" id="description" rows="3" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required></textarea>
+                </div>
+                <div class="mt-6">
+                    <button type="submit" class="inline-flex items-center px-4 py-2 text-xs font-semibold tracking-widest text-white uppercase transition bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-700 active:bg-indigo-700 focus:outline-none focus:border-indigo-700 focus:ring focus:ring-indigo-300 disabled:opacity-25">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+
+</script>
+{% endblock content %}

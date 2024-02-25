@@ -1,0 +1,387 @@
+
+
+{% extends 'shared/base_client.html' %}
+{% block title %} Edit Quiz {% endblock title %}
+{% block content %}
+
+    <div class="container mx-auto mt-32 sm:mt-24 xl:mt-8">
+        <div class="max-w-3xl mx-auto overflow-hidden bg-gray-200 shadow-md rounded-2xl ">
+            <div class="p-6">
+                <h1 class="mb-4 text-xl font-semibold">Add Quizzes To:</h1>
+                <form action="" method="POST">
+                    <!-- CSRF Token -->
+                    {% csrf_token %}
+                    <div class="grid grid-cols-2 gap-4">
+                        <!-- Question Text -->
+                        <div class="mb-4">
+                            <label for="question_text" class="block text-sm font-medium text-gray-700">Question Text</label>
+                            <input type="text" id="question_text" required name="question_text" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        </div>
+                        
+                        <!-- Answer A -->
+                        <div class="mb-4">
+                            <label for="answerA" class="block text-sm font-medium text-gray-700">Answer A</label>
+                            <input type="text" id="answerA" required name="answerA" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        </div>
+                        
+                        <!-- Answer B -->
+                        <div class="mb-4">
+                            <label for="answerB" class="block text-sm font-medium text-gray-700">Answer B</label>
+                            <input type="text" id="answerB" required name="answerB" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        </div>
+                        
+                        <!-- Answer C -->
+                        <div class="mb-4">
+                            <label for="answerC" class="block text-sm font-medium text-gray-700">Answer C</label>
+                            <input type="text" id="answerC" required name="answerC" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        </div>
+                        
+                        <!-- Answer D -->
+                        <div class="mb-4">
+                            <label for="answerD" class="block text-sm font-medium text-gray-700">Answer D</label>
+                            <input type="text" id="answerD" required name="answerD" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        </div>
+                        
+                        <!-- Correct Answer -->
+                        <div class="mb-4">
+                            <label for="correct_answer" class="block text-sm font-medium text-gray-700">Correct Answer</label>
+                            <select id="correct_answer" name="correct_answer" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                            </select>
+                        </div>
+                        
+                    </div>                  
+                    <!-- Submit Button -->
+                    <div class="mb-4">
+                        <button type="button" class="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600" id="submitBtn">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+        
+    <div class="w-full p-8 mt-3 bg-white rounded-md">
+        <div class="flex items-center justify-between pb-6 ">    
+        </div>
+        <div>
+            <div class="px-4 py-4 -mx-4 sm:-mx-8 sm:px-8">
+                <div class="inline-block min-w-full overflow-hidden rounded-lg shadow">
+                    <table class="min-w-full leading-normal">
+                        <thead>
+                            <tr>
+                                <th class="px-5 py-3 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200">Question</th>
+                                <th class="px-5 py-3 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200">Answer A</th>
+                                <th class="px-5 py-3 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200">Answer B</th>
+                                <th class="px-5 py-3 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200">Answer C</th>
+                                <th class="px-5 py-3 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200">Answer D</th>
+                                <th class="px-5 py-3 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200">Corect Answer</th>
+                                <th class="px-5 py-3 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200"></th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="Quizzes">
+                            {% for question in quiz.questions %}                                                                                
+                                <tr class="" id="{{question.question_id}}">
+                                    <td class="px-5 py-5 text-sm bg-white border-b border-gray-200">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0 w-10 h-10">
+                                                <img class="w-full h-full "
+                                                    src="/static/upload/options.png"
+                                                    alt="" />
+                                            </div>
+                                            <div class="ml-3">
+                                                <p class="text-gray-900 whitespace-no-wrap">
+                                                    {{ question.question_text }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-5 py-5 text-sm bg-white border-b border-gray-200">
+                                        <p class="text-gray-900 whitespace-no-wrap"> {{ question.options.0 }}</p>
+                                    </td>
+                                    
+                                    <td class="px-5 py-5 text-sm bg-white border-b border-gray-200">
+                                        <p class="text-gray-900 whitespace-no-wrap">{{ question.options.1 }}</p>
+                                    </td>
+                                    <td class="px-5 py-5 text-sm bg-white border-b border-gray-200">
+                                        <p class="text-gray-900 whitespace-no-wrap">{{ question.options.2 }}</p>
+                                    </td>
+                                    <td class="px-5 py-5 text-sm bg-white border-b border-gray-200">
+                                        <p class="text-gray-900 whitespace-no-wrap">{{ question.options.3 }}</p>
+                                    </td>
+                                    <td class="px-5 py-5 text-sm bg-white border-b border-gray-200">
+                                        <p class="text-gray-900 whitespace-no-wrap">{{ question.options.4 }}</p>
+                                    </td>
+                                    <td class="p-4 px-6 text-xs text-right align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+                                        <div class="flex flex-wrap items-baseline justify-center space-x-2 space-y-2">
+                                            <button  class="px-4 py-2 text-blue-100 duration-300 bg-blue-500 rounded-lg hover:bg-blue-600" onclick="openModal('modelConfirm','{{question.question_id}}')">Edit</button>
+
+                                            <a href="{% url 'remove_question' quizid question.question_id%}" class="px-4 py-2 text-red-100 duration-300 rounded-lg bg-red hover:bg-rose-500">Delete</a>
+
+                                        </div>           
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                    
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <div id="modelConfirm" class="fixed inset-0 z-50 hidden w-full h-full px-4 overflow-y-auto bg-gray-900 bg-opacity-60 ">
+        <div class="relative max-w-3xl mx-auto bg-white rounded-md shadow-xl top-40">              
+            <div class="flex justify-end p-2">
+
+                <h1 class="pl-6 mb-4 text-xl font-semibold">Edit Question:</h1>
+
+                <button onclick="closeModal('modelConfirm')" type="button"
+                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </div>    
+
+            <div class="p-6 pt-0 text-center">
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="hidden mb-4">
+                        <label for="question_text" class="block text-sm font-medium text-gray-700">ID</label>
+                        <input type="text" id="question_id_edit" required name="question_id_edit" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    </div>
+                    <!-- Question Text -->
+                    <div class="mb-4">
+                        <label for="question_text" class="block text-sm font-medium text-gray-700">Question Text</label>
+                        <input type="text" id="question_text_edit" required name="question_text" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    </div>
+                    
+                    <!-- Answer A -->
+                    <div class="mb-4">
+                        <label for="answerA" class="block text-sm font-medium text-gray-700">Answer A</label>
+                        <input type="text" id="answerA_edit" required name="answerA" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    </div>
+                    
+                    <!-- Answer B -->
+                    <div class="mb-4">
+                        <label for="answerB" class="block text-sm font-medium text-gray-700">Answer B</label>
+                        <input type="text" id="answerB_edit" required name="answerB" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    </div>
+                    
+                    <!-- Answer C -->
+                    <div class="mb-4">
+                        <label for="answerC" class="block text-sm font-medium text-gray-700">Answer C</label>
+                        <input type="text" id="answerC_edit" required name="answerC" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    </div>
+                    
+                    <!-- Answer D -->
+                    <div class="mb-4">
+                        <label for="answerD" class="block text-sm font-medium text-gray-700">Answer D</label>
+                        <input type="text" id="answerD_edit" required name="answerD" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    </div>
+                    
+                    <!-- Correct Answer -->
+                    <div class="mb-4">
+                        <label for="correct_answer_edit" class="block text-sm font-medium text-gray-700">Correct Answer</label>
+                        <select id="correct_answer_edit" name="correct_answer_edit" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                        </select>
+                    </div>
+                    
+                </div>                           
+                <button id="editQuestion" onclick="closeModal('modelConfirm')"
+                    class="text-white bg-blue-400 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2">
+                    Save
+                </button>
+            </div>
+    
+        </div>
+    </div>
+    
+    <script type="text/javascript">
+            window.openModal = function(modalId,selectedid) {
+                var row = document.getElementById(selectedid); // Assume this is the ID of the selected row
+                var cells = row.getElementsByTagName("td");
+                document.getElementById("question_id_edit").value = selectedid;
+        
+                document.getElementById("question_text_edit").value = cells[0].innerText;
+                document.getElementById("answerA_edit").value = cells[1].innerText;
+                document.getElementById("answerB_edit").value = cells[2].innerText;
+                document.getElementById("answerC_edit").value = cells[3].innerText;
+                document.getElementById("answerD_edit").value = cells[4].innerText;
+                document.getElementById("correct_answer_edit").value = cells[5].innerText;
+                document.getElementById(modalId).style.display = 'block'
+                document.getElementsByTagName('body')[0].classList.add('overflow-y-hidden')
+
+            }
+        
+            window.closeModal = function(modalId) {
+                document.getElementById(modalId).style.display = 'none'
+                document.getElementsByTagName('body')[0].classList.remove('overflow-y-hidden')
+            }
+        
+            // Close all modals when press ESC
+            document.onkeydown = function(event) {
+                event = event || window.event;
+                if (event.keyCode === 27) {
+                    document.getElementsByTagName('body')[0].classList.remove('overflow-y-hidden')
+                    let modals = document.getElementsByClassName('modal');
+                    Array.prototype.slice.call(modals).forEach(i => {
+                        i.style.display = 'none'
+                    })
+                }
+            };
+
+        $(document).ready(function() {
+            $("#submitBtn").click(function(e) {
+                e.preventDefault();
+                var question_text = $("#question_text").val();
+                var answerA = $("#answerA").val();
+                var answerB = $("#answerB").val();
+                var answerC = $("#answerC").val();
+                var answerD = $("#answerD").val();
+                var correct_answer = $("#correct_answer").val();
+                
+                // Kiểm tra xem các trường câu hỏi và câu trả lời có được điền không
+                if (!question_text || !answerA || !answerB || !answerC || !answerD || !correct_answer) {
+                    alert("Vui lòng điền đầy đủ thông tin câu hỏi và câu trả lời!");
+                    return;
+                }
+                
+                // Tạo đối tượng formData
+                var formData = {
+                    question_text: question_text,
+                    answerA: answerA,
+                    answerB: answerB,
+                    answerC: answerC,
+                    answerD: answerD,
+                    correct_answer: correct_answer,
+                    csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val()
+                };      
+                // Gửi dữ liệu form bằng AJAX
+                $.ajax({
+                    type: "POST",
+                    url: "{% url 'add_question' quizid %}",
+                    data: formData,
+                    success: function(response) {
+                        console.log(response.data);
+                        const question  = response.data
+                        const newMember = $(`
+                                <tr class="">
+                                    <td class="px-5 py-5 text-sm bg-white border-b border-gray-200">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0 w-10 h-10">
+                                                <img class="w-full h-full "
+                                                    src="/static/upload/options.png"
+                                                    alt=""/>
+                                            </div>
+                                                <div class="ml-3">
+                                                    <p class="text-gray-900 whitespace-no-wrap">
+                                                        ${question.question_text}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                    </td>
+                                    <td class="px-5 py-5 text-sm bg-white border-b border-gray-200">
+                                        <p class="text-gray-900 whitespace-no-wrap">  ${question.options[0]}</p>
+                                    </td>                                  
+                                    <td class="px-5 py-5 text-sm bg-white border-b border-gray-200">
+                                        <p class="text-gray-900 whitespace-no-wrap"> ${question.options[1]}</p>
+                                    </td>
+                                    <td class="px-5 py-5 text-sm bg-white border-b border-gray-200">
+                                        <p class="text-gray-900 whitespace-no-wrap"> ${question.options[2]}</p>
+                                    </td>
+                                    <td class="px-5 py-5 text-sm bg-white border-b border-gray-200">
+                                        <p class="text-gray-900 whitespace-no-wrap"> ${question.options[3]}</p>
+                                    </td>
+                                    <td class="px-5 py-5 text-sm bg-white border-b border-gray-200">
+                                        <p class="text-gray-900 whitespace-no-wrap"> ${question.options[4]}</p>
+                                    </td>
+                                    <td class="p-4 px-6 text-xs text-right align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+                                        <div class="flex flex-wrap items-baseline justify-center space-x-2 space-y-2">
+                                            <a href="" class="px-4 py-2 text-blue-100 duration-300 bg-blue-500 rounded-lg hover:bg-blue-600">Edit</a>
+                                            <a href="/remove-question/%3Fquiz={{quizid}}&question=${question.question_id}" class="px-4 py-2 text-red-100 duration-300 rounded-lg bg-red hover:bg-rose-500">Delete</a>
+
+                                        </div>           
+                                    </td>
+                                </tr>
+                            `);
+
+                        $("#Quizzes").append(newMember);
+                
+                    },
+                    error: function(xhr, status, error) {
+                        // Xử lý lỗi (nếu có)
+                        console.error(xhr.responseText);
+                    }
+                });
+            });
+            $("#editQuestion").click(function(e) {
+                e.preventDefault();
+                var question_text = $("#question_text_edit").val();
+                var answerA = $("#answerA_edit").val();
+                var answerB = $("#answerB_edit").val();
+                var answerC = $("#answerC_edit").val();
+                var answerD = $("#answerD_edit").val();
+                var correct_answer = $("#correct_answer_edit").val();
+                var idQuestion = $("#question_id_edit").val();
+                // Kiểm tra xem các trường câu hỏi và câu trả lời có được điền không
+                if (!question_text || !answerA || !answerB || !answerC || !answerD || !correct_answer) {
+                    alert("Vui lòng điền đầy đủ thông tin câu hỏi và câu trả lời!");
+                    return;
+                }
+                
+                // Tạo đối tượng formData
+                var formData_edit = {
+                    idQuestion:idQuestion,
+                    question_text: question_text,
+                    answerA: answerA,
+                    answerB: answerB,
+                    answerC: answerC,
+                    answerD: answerD,
+                    correct_answer: correct_answer,
+                    csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val()
+                };      
+                // Gửi dữ liệu form bằng AJAX
+                console.log(formData_edit)
+
+                $.ajax({
+                    type: "POST",
+                    url: '/edit-question/%3Fquiz={{quizid}}&question='+formData_edit.idQuestion,
+                    data: formData_edit,
+                    success: function(response) {
+                        console.log(response.data);
+                        const question = response.data;
+                    
+                        var row = document.getElementById(question.question_id); 
+                        if (row) {
+                            row.cells[0].querySelector('p').innerText = question.question_text;
+                            row.cells[1].innerText = question.options[0];
+                            row.cells[2].innerText = question.options[1];
+                            row.cells[3].innerText = question.options[2];
+                            row.cells[4].innerText = question.options[3];
+                            row.cells[5].innerText = question.options[4];
+                        } else {
+                            console.log("Row not found.");
+                        }                
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock content %}

@@ -1,0 +1,41 @@
+
+{% extends 'shared/base.html' %}
+{% block title %} Register {% endblock title %}
+{% block content %}
+
+
+<body class="relative flex items-center justify-center h-screen bg-white">
+
+
+
+</body>
+<script type="text/javascript">
+
+    const socket = new WebSocket('ws://localhost:8765');
+
+    // Xử lý khi kết nối thành công
+    socket.addEventListener('open', (event) => {
+        console.log('Connected to WebSocket server');
+        
+        // Gửi dữ liệu tới server
+        socket.send('Hello, server!');
+    });
+
+    // Xử lý khi nhận dữ liệu từ server
+    socket.addEventListener('message', (event) => {
+        console.log(`Received message: ${event.data}`);
+    });
+
+    // Xử lý khi đóng kết nối
+    socket.addEventListener('close', (event) => {
+        console.log('Connection closed');
+    });
+
+    // Xử lý khi có lỗi
+    socket.addEventListener('error', (event) => {
+        console.error('WebSocket error:', event);
+    });
+
+    
+</script>
+{% endblock content %}
