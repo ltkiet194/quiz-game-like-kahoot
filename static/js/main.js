@@ -78,7 +78,7 @@ class WebSocketClient {
             });
         }
         else if (eventData.Tags === 9){
-            $("#Quiz").removeClass("hidden");
+            $("#QuizCard").removeClass("hidden");
             startCountdownStart(5)
         }
         else if (eventData.Tags === 10){
@@ -220,8 +220,9 @@ function startCountdown(seconds) {
         seconds--;
 
         countdownElement.text(`${seconds}s`);
-
         if (seconds <= 0) {
+            flipCard()
+
             countdownElement.text('Time is up!');
             clearInterval(countdownInterval);           
         }
@@ -235,8 +236,9 @@ function startCountdownStart(seconds) {
         seconds--;
 
         countdownElement.text(`${seconds}s`);
-
         if (seconds <= 0) {
+            flipCard()
+
             clearInterval(countdownInterval);
             countdownElement.text('Start!');
         }
@@ -249,4 +251,9 @@ $(document).ready(function () {
         $("#quiz-button").removeClass("bg-white");
         $(this).addClass("bg-blue");
     });
+
 });
+
+function flipCard() {
+    $(".card__inner").toggleClass("flipped");
+}

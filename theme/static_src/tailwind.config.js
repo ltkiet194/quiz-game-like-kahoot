@@ -4,6 +4,26 @@
  * If you need the full config, get it from here:
  * https://unpkg.com/browse/tailwindcss@latest/stubs/defaultConfig.stub.js
  */
+const plugin = require('tailwindcss/plugin')
+const MyClass = plugin(function ({ addUtilities }) {
+    addUtilities({
+        ".my-rotate-y-180": {
+            transform: "rotateY(180deg)",
+        },
+        ".preserve-3d": {
+            transformStyle: "preserve-3d",
+        },
+        ".perspective": {
+        perspective: "1000px",
+        },
+        ".backface-hidden": {
+            backfaceVisibility: "hidden",
+        },
+        ".flip": {
+            transform: "rotateY(180deg)",
+        },
+    })
+})
 
 module.exports = {
     content: [
@@ -84,6 +104,7 @@ module.exports = {
          * for forms. If you don't like it or have own styling for forms,
          * comment the line below to disable '@tailwindcss/forms'.
          */
+        MyClass,
         require('@tailwindcss/forms'),
         require('@tailwindcss/typography'),
         require('@tailwindcss/aspect-ratio'),

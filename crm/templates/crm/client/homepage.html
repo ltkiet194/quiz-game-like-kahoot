@@ -1,6 +1,15 @@
 {% extends 'shared/base.html' %} {% block title %} Room: {{roomCode}} {% endblock title %}
 {% block content %}
+    <style> 
+        .back::before{
+            @apply absolute w-full h-full z-0 bg-contain flip;
+        }
+        .flipped{
+            transform: rotateY(180deg);
+        }
 
+        
+    </style>
     <section>
 
     <div id="modal_overlay" class="absolute inset-0 z-50 flex items-start justify-center hidden w-full h-screen pt-64 bg-black bg-opacity-30 md:items-center md:pt-0">
@@ -22,74 +31,100 @@
         </div>
     </div>
 
-
     <div id="root">
-        <div class="laptop:px-24 desktop:py-16 mobile:py-8 mobile:px-3 relative grid min-h-screen grid-rows-[auto_1fr] overflow-hidden px-56 py-32 font-rubik transition-all duration-300 bg-light-grey " id="Quiz">
-            <main class="z-[2]">
-                <div>
-                <div class="grid grid-cols-2 gap-x-24 gap-y-12 desktop:grid-cols-1 desktop:gap-x-0">
-                    <div class="flex flex-col gap-11 desktop:pb-12 mobile:gap-5 mobile:pb-4">
-                <div class="flex items-center">
-                    <p class="text-[2rem] italic lead-[150%] transition-all thời lượng-300 mobile:text-[1.4rem] text-dark-navy" id="quizIndex">Quiz 1 / 10</p>
-                    <div class="gap-8 pl-12 mt-auto">
-                        <div class="inline-flex p-2 mx-1 text-yellow-600 align-middle w-fit round-lg">
-                            <div class="font-mono text-[2rem] leading-none" x-text="seconds" id="countdown">5s</div>
+        <section class="flex items-center justify-center hidden h-screen text-white bg-gray-300 gap-x-16" id="QuizCard">
+            <div class="">
+                <div class=" m-15 w-[400px] h-[800px] perspective rounded-10 sm:w-[720px] sm:h-[1020px] xl:w-[1280px] xl:h-[720px]">
+                    <div class="w-full h-full transition-all duration-1000 rounded-lg card__inner preserve-3d">
+                        <div class="absolute w-full h-full bg-gray-500 rounded-md front face backface-hidden shadow-md z-[1]">
+                            <div class="flex items-center justify-center w-full h-full area">
+                                <h1 id="typewriter" class="text-4xl font-bold"></h1>
+                                <ul class="circles">
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="absolute w-full h-full rounded-md back face shadow-sm backface-hidden overflow-hidden -z-[1] block flip box-border">  
+                            <div class="laptop:px-24 desktop:py-16 mobile:py-8 mobile:px-3 relative grid min-h-screen grid-rows-[auto_1fr] overflow-hidden px-36 py-24 font-rubik transition-all duration-300 bg-light-grey " id="Quiz">
+                                <main class="z-[2]">
+                                    <div>
+                                    <div class="grid grid-cols-2 gap-x-24 gap-y-12 desktop:grid-cols-1 desktop:gap-x-0">
+                                        <div class="flex flex-col gap-11 desktop:pb-12 mobile:gap-5 mobile:pb-4">
+                                        <div class="flex items-center">
+                                            <p class="text-[2rem] italic lead-[150%] transition-all thời lượng-300 mobile:text-[1.4rem] text-dark-navy" id="quizIndex">Quiz 1 / 10</p>
+                                            <div class="gap-8 pl-12 mt-auto">
+                                                <div class="inline-flex p-2 mx-1 text-yellow-600 align-middle w-fit round-lg">
+                                                    <div class="font-mono text-[2rem] leading-none" x-text="seconds" id="countdown">5s</div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                            <h2 class="text-[1.6rem] font-medium leading-[120%] transition-all duration-300 mobile:text-[1rem] text-dark-navy" id="QuestionText">
+                                            </h2>          
+                                            </div>
+                                            <div class="space-y-10 mobile:space-y-5 ">
+                                                <button
+                                                    class="tablet:gap-4 mobile:rounded-[1.2rem] 
+                                                    mobile:text-[1.8rem] mobile:px-5 mobile:py-4 
+                                                    group flex w-full items-center gap-12 rounded-[1.4rem] 
+                                                    border-[3px] px-4 py-1 text-[2.8rem] font-medium leading-[100%]
+                                                    text-grey-navy shadow-sm transition-all duration-300 border-transparent hover:border-purple bg-white"
+                                                    id="quiz-button-A">
+                                                    <span class="inline-block rounded px-5 py-2 transition-all duration-300 bg-light-grey group-hover:bg-[#f6e7ff] group-hover:text-[#a729f5] text-[1rem]">A</span>
+                                                    <span class="transition-all duration-300 text-dark-navy text-[1rem]" id="answerA"></span>
+                                                </button>
+                                                <button
+                                                    class="tablet:gap-4 mobile:rounded-[1.2rem] 
+                                                    mobile:text-[1.8rem] mobile:px-5 mobile:py-4 
+                                                    group flex w-full items-center gap-12 rounded-[1.4rem] 
+                                                    border-[3px] px-4 py-1 text-[2.8rem] font-medium leading-[100%]
+                                                    text-grey-navy shadow-sm transition-all duration-300 border-transparent hover:border-purple bg-white"
+                                                    id="quiz-button-B">
+                                                    <span class="inline-block rounded px-5 py-2 transition-all duration-300 bg-light-grey group-hover:bg-[#f6e7ff] group-hover:text-[#a729f5] text-[1rem]">B</span>
+                                                    <span class="transition-all duration-300 text-dark-navy text-[1rem]" id="answerB"></span>
+                                                </button>
+                                                <button
+                                                    class="tablet:gap-4 mobile:rounded-[1.2rem] 
+                                                    mobile:text-[1.8rem] mobile:px-5 mobile:py-4 
+                                                    group flex w-full items-center gap-12 rounded-[1.4rem] 
+                                                    border-[3px] px-4 py-1 text-[2.8rem] font-medium leading-[100%]
+                                                    text-grey-navy shadow-sm transition-all duration-300 border-transparent hover:border-purple bg-white"
+                                                    id="quiz-button-C">
+                                                    <span class="inline-block rounded  px-5 py-2 transition-all duration-300 bg-light-grey group-hover:bg-[#f6e7ff] group-hover:text-[#a729f5] text-[1rem]">C</span>
+                                                    <span class="transition-all duration-300 text-dark-navy text-[1rem]" id="answerC"></span>
+                                                    
+                                                </button>
+                                                <button
+                                                    class="tablet:gap-4 mobile:rounded-[1.2rem] 
+                                                    mobile:text-[1.8rem] mobile:px-5 mobile:py-4 
+                                                    group flex w-full items-center gap-12 rounded-[1.4rem] 
+                                                    border-[3px] px-4 py-1 text-[2.8rem] font-medium leading-[100%]
+                                                    text-grey-navy shadow-sm transition-all duration-300 border-transparent hover:border-purple bg-white"
+                                                    id="quiz-button-D">
+                                                    <span class="inline-block rounded  px-5 py-2 transition-all duration-300 bg-light-grey group-hover:bg-[#f6e7ff] group-hover:text-[#a729f5] text-[1rem]">D</span>
+                                                    <span class="transition-all duration-300 text-dark-navy text-[1rem]" id="answerD"></span>
+                                                </button>
+                                            </div>
+                                        <div class="col-start-2 desktop:col-start-1">
+                                        </div>
+                                    </div>
+                                    </div>
+                                </main>      
+                            </div>                    
                         </div>
                     </div>
-                </div>
-                    <h2 class="text-[1.6rem] font-medium leading-[120%] transition-all duration-300 mobile:text-[1rem] text-dark-navy" id="QuestionText">
-                    </h2>          
-                    </div>
-                    <div class="space-y-10 mobile:space-y-5 ">
-                        <button
-                            class="tablet:gap-4 mobile:rounded-[1.2rem] 
-                            mobile:text-[1.8rem] mobile:px-5 mobile:py-4 
-                            group flex w-full items-center gap-12 rounded-[1.4rem] 
-                            border-[3px] px-4 py-1 text-[2.8rem] font-medium leading-[100%]
-                            text-grey-navy shadow-sm transition-all duration-300 border-transparent hover:border-purple bg-white"
-                            id="quiz-button-A">
-                            <span class="inline-block rounded px-5 py-2 transition-all duration-300 bg-light-grey group-hover:bg-[#f6e7ff] group-hover:text-[#a729f5] text-[1rem]">A</span>
-                            <span class="transition-all duration-300 text-dark-navy text-[1rem]" id="answerA"></span>
-                        </button>
-                        <button
-                            class="tablet:gap-4 mobile:rounded-[1.2rem] 
-                            mobile:text-[1.8rem] mobile:px-5 mobile:py-4 
-                            group flex w-full items-center gap-12 rounded-[1.4rem] 
-                            border-[3px] px-4 py-1 text-[2.8rem] font-medium leading-[100%]
-                            text-grey-navy shadow-sm transition-all duration-300 border-transparent hover:border-purple bg-white"
-                            id="quiz-button-B">
-                            <span class="inline-block rounded px-5 py-2 transition-all duration-300 bg-light-grey group-hover:bg-[#f6e7ff] group-hover:text-[#a729f5] text-[1rem]">B</span>
-                            <span class="transition-all duration-300 text-dark-navy text-[1rem]" id="answerB"></span>
-                        </button>
-                        <button
-                            class="tablet:gap-4 mobile:rounded-[1.2rem] 
-                            mobile:text-[1.8rem] mobile:px-5 mobile:py-4 
-                            group flex w-full items-center gap-12 rounded-[1.4rem] 
-                            border-[3px] px-4 py-1 text-[2.8rem] font-medium leading-[100%]
-                            text-grey-navy shadow-sm transition-all duration-300 border-transparent hover:border-purple bg-white"
-                            id="quiz-button-C">
-                            <span class="inline-block rounded  px-5 py-2 transition-all duration-300 bg-light-grey group-hover:bg-[#f6e7ff] group-hover:text-[#a729f5] text-[1rem]">C</span>
-                            <span class="transition-all duration-300 text-dark-navy text-[1rem]" id="answerC"></span>
-                            
-                        </button>
-                        <button
-                            class="tablet:gap-4 mobile:rounded-[1.2rem] 
-                            mobile:text-[1.8rem] mobile:px-5 mobile:py-4 
-                            group flex w-full items-center gap-12 rounded-[1.4rem] 
-                            border-[3px] px-4 py-1 text-[2.8rem] font-medium leading-[100%]
-                            text-grey-navy shadow-sm transition-all duration-300 border-transparent hover:border-purple bg-white"
-                            id="quiz-button-D">
-                            <span class="inline-block rounded  px-5 py-2 transition-all duration-300 bg-light-grey group-hover:bg-[#f6e7ff] group-hover:text-[#a729f5] text-[1rem]">D</span>
-                            <span class="transition-all duration-300 text-dark-navy text-[1rem]" id="answerD"></span>
-                        </button>
-                    </div>
-                    <div class="col-start-2 desktop:col-start-1">
-                    </div>
-                </div>
-                </div>
-            </main>      
-        </div>
-        
+                </div>  
+            </div>           
+        </section>
         <div class="w-full p-8 bg-white rounded-md">
             <div class="flex items-center justify-between pb-6 ">    
             </div>
@@ -182,6 +217,7 @@
                 }
             };
             client.socket.send(JSON.stringify(jsonData))
+            flipCard()
         }
         $(document).ready(function(){
             $("#quiz-button-A").click(function(){
@@ -198,6 +234,8 @@
             });
         });
 
+        const words = ["Hello, World!", "Welcome to my website!", "This is a typewriter effect."];
+        new Typewriter(words, "typewriter");
     </script>
     </section>
 

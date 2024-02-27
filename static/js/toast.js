@@ -31,3 +31,38 @@ function createToast(type, title, text) {
     notifications.append(newToast);
     newToast.timeOut = setTimeout(() => newToast.remove(), 5000);
 }
+
+class Typewriter {
+    constructor(words, elementId, typingSpeed = 100) {
+        this.words = words;
+        this.element = document.getElementById(elementId);
+        this.typingSpeed = typingSpeed;
+        this.currentWordIndex = 0;
+        this.currentCharacterIndex = 0;
+        this.isDeleting = false;
+        this.type();
+    }
+
+    type() {
+        const currentWord = this.words[this.currentWordIndex];
+        if (this.isDeleting) {
+            this.element.textContent = currentWord.substring(0, this.currentCharacterIndex - 1);
+            this.currentCharacterIndex--;
+            if (this.currentCharacterIndex === 0) {
+                this.isDeleting = false;
+                this.currentWordIndex = (this.currentWordIndex + 1) % this.words.length;
+            }
+        } else {
+            this.element.textContent = currentWord.substring(0, this.currentCharacterIndex + 1);
+            this.currentCharacterIndex++;
+            if (this.currentCharacterIndex === currentWord.length) {
+                this.isDeleting = true;
+            }
+        }
+        setTimeout(() => this.type(), this.typingSpeed);
+    }
+        
+    // const words = ["Hello, World!", "Welcome to my website!", "This is a typewriter effect."];
+    // new Typewriter(words, "typewriter");
+}
+

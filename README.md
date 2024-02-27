@@ -20,8 +20,6 @@ Clone the Repository:
 
 git clone https://github.com/ltkiet194/quiz-game-like-kahoot.git
 
-## Navigate to Project Directory:
-cd quiz-game
 ## Install Dependencies:
 
 pip install -r requirements.txt
