@@ -10,24 +10,24 @@
     
         <div class="container mx-auto">
             <div class="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-4">
-                <div class="flex justify-center p-8 bg-gray-100 border-2 border-gray-300 text-8xl rounded-xl">
-                    <div id="text" class="p-4 font-black text-center text-transparent md:text-6xl bg-clip-text bg-gradient-to-r from-green via-blue-500 to-purple">
+                <div class="flex justify-center bg-gray-100 border-2 border-gray-300 rounded-xl">
+                    <div id="text" class="text-5xl font-black text-center text-transparent bg-clip-text bg-gradient-to-r from-green via-blue-500 to-purple">
                         {{room.RoomCode}}
                     </div>
                 </div>
-                <div class="flex justify-center bg-gray-100 border-2 border-gray-300 p-9 text-8xl rounded-xl">
+                <div class="flex justify-center bg-gray-100 border-2 border-gray-300 rounded-xl">
                     <div id="text" class="text-5xl font-black text-center uppercase">
-                        <button id="btnCreateRoom" class="px-4 mt-3 duration-300 border-2 rounded-lg border-rose-600 text-rose-600 hover:bg-rose-600 hover:text-rose-100">Create!</button>
+                        <button id="btnCreateRoom" class="m-1 duration-300 border-2 rounded-lg border-rose-600 text-rose-600 hover:bg-rose-600 hover:text-rose-100">Create!</button>
                     </div>
                 </div>
-                <div class="flex justify-center bg-gray-100 border-2 border-gray-300 p-9 text-8xl rounded-xl">
+                <div class="flex justify-center bg-gray-100 border-2 border-gray-300 rounded-xl">
                     <div id="text" class="text-5xl font-black text-center uppercase">
-                        <button id="btnStartGame" class="px-4 mt-3 duration-300 border-2 rounded-lg border-rose-600 text-rose-600 hover:bg-rose-600 hover:text-rose-100">Start!</button>
+                        <button id="btnStartGame" class="m-1 duration-300 border-2 rounded-lg border-rose-600 text-rose-600 hover:bg-rose-600 hover:text-rose-100">Start!</button>
                     </div>
                 </div>
-                <div class="flex justify-center text-5xl bg-gray-100 border-2 border-gray-300 rounded-xl p-9"> 
+                <div class="flex justify-center bg-gray-100 border-2 border-gray-300 rounded-xl "> 
                     <div id="text" class="text-5xl font-black text-center uppercase">
-                        <button id="statusRoom" class="px-4 mt-3 text-white duration-300 bg-gray-600 hover:text-gray-100 rounded-xl">Offline</button>
+                        <button id="statusRoom" class="px-2 m-1 text-white duration-300 bg-gray-600 hover:text-gray-100 rounded-xl">Offline</button>
                     </div>
                 </div>
             </div>
@@ -78,15 +78,16 @@
         </div>
     </div>
 </div>
+<div class="fixed z-50 top-10 right-4 notifications" id="notifications"></div>
+
 <script>
     const socketUrl = 'ws://localhost:8765';
     const client = new WebSocketClient(socketUrl, '{{room.RoomCode}}', 'Host','{{token}}');
     
 
-    
-    function startQuizzes() {
+    function createRoomQuizzes() {
         let jsonData = {
-            Tags: 8,
+            Tags:8,
             Data: {
                 RoomName: 'Room: {{room.RoomCode}}',
                 RoomCode: '{{room.RoomCode}}',
@@ -96,7 +97,21 @@
         client.socket.send(JSON.stringify(jsonData));
         changeStatus()       
     }
-    document.getElementById("btnCreateRoom").addEventListener("click", startQuizzes);
+    function startQuizzes() {
+        let jsonData = {
+            Tags:9,
+            Data: {
+                RoomName: 'Room: {{room.RoomCode}}',
+                RoomCode: '{{room.RoomCode}}',
+                QuizzesId: '{{quizid}}',
+            }
+        };
+        client.socket.send(JSON.stringify(jsonData));
+    }
+    btnStartGame
+    $("#btnCreateRoom").on("click", createRoomQuizzes);
+
+    $("#btnStartGame").on("click", startQuizzes);
 
 </script>
 {% endblock content %}

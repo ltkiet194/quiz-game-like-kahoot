@@ -1,0 +1,86 @@
+    .notifications{
+        position: fixed;
+        top: 30px;
+        right: 0px;
+    }
+    .toast{
+        position: relative;
+        padding: 6px;
+        color: #fff;
+        width: 300px;
+        display: grid;
+        grid-template-columns: 30px 1fr 70px;
+        border-radius: 5px;
+        --color: #49ff70;
+        background-image: 
+            linear-gradient(
+                to right, #57da4bee, #03ce2f  30%
+            ); 
+        animation: show 0.3s ease 1 forwards  
+    }
+    .toast i{
+        color: var(--color);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: x-large;
+    }
+    .toast .title{
+        font-size: x-large;
+        font-weight: bold;
+    }
+    .toast span, .toast i:nth-child(3){
+        color: #fff;
+        opacity: 0.6;
+    }
+    @keyframes show{
+        0%{
+            transform: translateX(100%);
+        }
+        40%{
+            transform: translateX(-5%);
+        }
+        80%{
+            transform: translateX(0%);
+        }
+        100%{
+            transform: translateX(-10%);
+        }
+    }
+    .toast::before{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background-color: var(--color);
+        width: 100%;
+        height: 3px;
+        content: '';
+        box-shadow: 0 0 10px var(--color);
+        animation: timeOut 5s linear 1 forwards
+    }
+    @keyframes timeOut{
+        to{
+            width: 0;
+        }
+    }
+    .toast.error{
+        --color: #49ff70;
+        background-image: 
+            linear-gradient(
+                to right, #e45050d7, #d8120c 30%
+            );
+    }
+    .toast.warning{
+        --color: #49ff70;
+        background-image: 
+            linear-gradient(
+                to right, #ebcf5de8, #daab12 30%
+            );
+    }
+    .toast.info{
+        --color: #49ff70;
+        background-image: 
+            linear-gradient(
+                to right, #3aadfa, #0b8dd8 30%
+            );
+    }

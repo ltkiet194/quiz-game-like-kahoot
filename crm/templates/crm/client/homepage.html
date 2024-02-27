@@ -1,6 +1,8 @@
 {% extends 'shared/base.html' %} {% block title %} Room: {{roomCode}} {% endblock title %}
 {% block content %}
+
     <section>
+
     <div id="modal_overlay" class="absolute inset-0 z-50 flex items-start justify-center hidden w-full h-screen pt-64 bg-black bg-opacity-30 md:items-center md:pt-0">
         <div id="modal" class="relative w-10/12 transition-opacity transition-transform duration-300 transform scale-150 -translate-y-full bg-white rounded shadow-lg pacity-0 md:w-fit h-1/4 md:h-fit">
         <div class="w-full p-3 mt-2">
@@ -21,24 +23,21 @@
     </div>
 
 
-
     <div id="root">
-        <div class="laptop:px-24 desktop:py-16 mobile:py-8 mobile:px-3 relative grid min-h-screen grid-rows-[auto_1fr] overflow-hidden px-56 py-32 font-rubik transition-all duration-300 bg-light-grey hidden" id="Quiz">
+        <div class="laptop:px-24 desktop:py-16 mobile:py-8 mobile:px-3 relative grid min-h-screen grid-rows-[auto_1fr] overflow-hidden px-56 py-32 font-rubik transition-all duration-300 bg-light-grey " id="Quiz">
             <main class="z-[2]">
                 <div>
                 <div class="grid grid-cols-2 gap-x-24 gap-y-12 desktop:grid-cols-1 desktop:gap-x-0">
                     <div class="flex flex-col gap-11 desktop:pb-12 mobile:gap-5 mobile:pb-4">
                 <div class="flex items-center">
-                    <p class="text-[2rem] italic lead-[150%] transition-all thời lượng-300 mobile:text-[1.4rem] text-dark-navy">Câu hỏi 1 / 10</p>
+                    <p class="text-[2rem] italic lead-[150%] transition-all thời lượng-300 mobile:text-[1.4rem] text-dark-navy" id="quizIndex">Quiz 1 / 10</p>
                     <div class="gap-8 pl-12 mt-auto">
-                        <div class="inline-flex w-24 p-2 mx-1 text-yellow-600 align-middle round-lg">
-                            <div class="font-mono text-[2rem] leading-none" x-text="seconds" id="countdown">50</div>
-                            <div class="font-mono text-[2rem] leading-none  pl-2">Giây</div>
+                        <div class="inline-flex p-2 mx-1 text-yellow-600 align-middle w-fit round-lg">
+                            <div class="font-mono text-[2rem] leading-none" x-text="seconds" id="countdown">5s</div>
                         </div>
                     </div>
                 </div>
-                    <h2 class="text-[1.6rem] font-medium leading-[120%] transition-all duration-300 mobile:text-[1rem] text-dark-navy">
-                        Con chó đen người ta gọi là con chó mực. Con chó vàng, người ta gọi là con chó phèn. Con chó sanh người ta gọi là con chó đẻ. Vậy con chó đỏ, người ta gọi là con chó gì?
+                    <h2 class="text-[1.6rem] font-medium leading-[120%] transition-all duration-300 mobile:text-[1rem] text-dark-navy" id="QuestionText">
                     </h2>          
                     </div>
                     <div class="space-y-10 mobile:space-y-5 ">
@@ -48,9 +47,9 @@
                             group flex w-full items-center gap-12 rounded-[1.4rem] 
                             border-[3px] px-4 py-1 text-[2.8rem] font-medium leading-[100%]
                             text-grey-navy shadow-sm transition-all duration-300 border-transparent hover:border-purple bg-white"
-                            id="quiz-button">
+                            id="quiz-button-A">
                             <span class="inline-block rounded px-5 py-2 transition-all duration-300 bg-light-grey group-hover:bg-[#f6e7ff] group-hover:text-[#a729f5] text-[1rem]">A</span>
-                            <span class="transition-all duration-300 text-dark-navy text-[1rem]">Hyper Trainer Marking Language</span>
+                            <span class="transition-all duration-300 text-dark-navy text-[1rem]" id="answerA"></span>
                         </button>
                         <button
                             class="tablet:gap-4 mobile:rounded-[1.2rem] 
@@ -58,9 +57,9 @@
                             group flex w-full items-center gap-12 rounded-[1.4rem] 
                             border-[3px] px-4 py-1 text-[2.8rem] font-medium leading-[100%]
                             text-grey-navy shadow-sm transition-all duration-300 border-transparent hover:border-purple bg-white"
-                            id="quiz-button">
+                            id="quiz-button-B">
                             <span class="inline-block rounded px-5 py-2 transition-all duration-300 bg-light-grey group-hover:bg-[#f6e7ff] group-hover:text-[#a729f5] text-[1rem]">B</span>
-                            <span class="transition-all duration-300 text-dark-navy text-[1rem]">Hyper Trainer Marking Language</span>
+                            <span class="transition-all duration-300 text-dark-navy text-[1rem]" id="answerB"></span>
                         </button>
                         <button
                             class="tablet:gap-4 mobile:rounded-[1.2rem] 
@@ -68,9 +67,9 @@
                             group flex w-full items-center gap-12 rounded-[1.4rem] 
                             border-[3px] px-4 py-1 text-[2.8rem] font-medium leading-[100%]
                             text-grey-navy shadow-sm transition-all duration-300 border-transparent hover:border-purple bg-white"
-                            id="quiz-button">
+                            id="quiz-button-C">
                             <span class="inline-block rounded  px-5 py-2 transition-all duration-300 bg-light-grey group-hover:bg-[#f6e7ff] group-hover:text-[#a729f5] text-[1rem]">C</span>
-                            <span class="transition-all duration-300 text-dark-navy text-[1rem]">Hyper Trainer Marking Language</span>
+                            <span class="transition-all duration-300 text-dark-navy text-[1rem]" id="answerC"></span>
                             
                         </button>
                         <button
@@ -79,9 +78,9 @@
                             group flex w-full items-center gap-12 rounded-[1.4rem] 
                             border-[3px] px-4 py-1 text-[2.8rem] font-medium leading-[100%]
                             text-grey-navy shadow-sm transition-all duration-300 border-transparent hover:border-purple bg-white"
-                            id="quiz-button">
+                            id="quiz-button-D">
                             <span class="inline-block rounded  px-5 py-2 transition-all duration-300 bg-light-grey group-hover:bg-[#f6e7ff] group-hover:text-[#a729f5] text-[1rem]">D</span>
-                            <span class="transition-all duration-300 text-dark-navy text-[1rem]">Hyper Trainer Marking Language</span>
+                            <span class="transition-all duration-300 text-dark-navy text-[1rem]" id="answerD"></span>
                         </button>
                     </div>
                     <div class="col-start-2 desktop:col-start-1">
@@ -145,27 +144,60 @@
         </div>
     </div>
     
-    <script type="text/javascript">
+<div class="fixed z-50 top-10 right-4 notifications" id="notifications"></div>
+<div class="flex justify-center mt-4 space-x-4">
+</div>
+
+
+<script type="text/javascript" >
+        var client
         $(document).ready(function () {
             var dpname =""
             $("#submitBtn").click(function () {
                 dpname = $("#Displayname").val();
-                setupSocket(dpname,'{{roomCode}}')
+                client = setupSocket(dpname,'{{roomCode}}')
             });
         });  
-        
+
         document.addEventListener("DOMContentLoaded", function() {
-            const buttonsAnswer = document.querySelectorAll("#quiz-button"); 
+            const buttonsAnswer =  document.querySelectorAll('[id^="quiz-button-"]');
             buttonsAnswer.forEach(function(button) {
                 button.addEventListener("click", function() {
         
                     buttonsAnswer.forEach(function(btn) {
                         btn.classList.remove("bg-green");
+                        btn.classList.add("bg-white");
                     });
+                    this.classList.remove("bg-white");                   
                     this.classList.add("bg-green");
                 });
             });
         });
+
+        function sendAnswer(ans){
+            let jsonData = {
+                Tags: 11,
+                Data: {
+                    Answer:ans                
+                }
+            };
+            client.socket.send(JSON.stringify(jsonData))
+        }
+        $(document).ready(function(){
+            $("#quiz-button-A").click(function(){
+                sendAnswer(0)
+            });
+            $("#quiz-button-B").click(function(){
+                sendAnswer(1)
+            });
+            $("#quiz-button-C").click(function(){
+                sendAnswer(2)
+            });
+            $("#quiz-button-D").click(function(){
+                sendAnswer(3)
+            });
+        });
+
     </script>
     </section>
 

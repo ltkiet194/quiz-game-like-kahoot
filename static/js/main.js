@@ -1,9 +1,6 @@
 
 
-
 class WebSocketClient {
-
-
     constructor(url,roomCode,DisplayName,email) {
         this.socket = new WebSocket(url);
         this.roomCode =roomCode;
@@ -65,7 +62,7 @@ class WebSocketClient {
                             </div>
                     </td>
                     <td class="px-5 py-5 text-sm bg-white">
-                        <p class="text-gray-900 whitespace-no-wrap">${player.Level}</p>
+                        <p class="text-gray-900 whitespace-no-wrap">${player.Score}</p>
                     </td>                              
                     <td class="px-5 py-5 text-sm bg-white">
                         <span
@@ -80,8 +77,16 @@ class WebSocketClient {
                 $("#member").append(newMember);
             });
         }
-        else if (eventData.Tags === 8){
+        else if (eventData.Tags === 9){
+            $("#Quiz").removeClass("hidden");
+            startCountdownStart(5)
+        }
+        else if (eventData.Tags === 10){
+            setQuiz(eventData.Data);
+        }
 
+        else if (eventData.Tags === 12){
+            sendNotify(eventData.Data);
         }
         console.log(eventData);
     }
@@ -91,6 +96,32 @@ class WebSocketClient {
     handleError(event) {
         console.error('WebSocket error:', event);
     }
+}
+
+function sendNotify(notify){
+    console.log(notify);
+    createToast(notify.type, notify.title, notify.text);
+}
+
+function setQuiz(quiz){
+    $("#quizIndex").text(`Quiz ${quiz.indexQuiz}`);
+    $("#QuestionText").text(`${quiz.question_text}`);
+    $("#answerA").text(`${quiz.AnswerA}`);
+    $("#answerB").text(`${quiz.AnswerB}`);
+    $("#answerC").text(`${quiz.AnswerC}`);
+    $("#answerD").text(`${quiz.AnswerD}`);
+    $("#answerD").text(`${quiz.AnswerD}`);
+    $('#countdown').text(`${quiz.time}s`);
+    startCountdown(quiz.time)
+    SetQuizAnswerBG()
+}
+
+function SetQuizAnswerBG(){
+    const buttonsAnswer =  document.querySelectorAll('[id^="quiz-button-"]');
+    buttonsAnswer.forEach(function(button) {
+        button.classList.remove("bg-green");
+        button.classList.add("bg-white");
+    });
 }
 function changeStatus() {
     var button = document.getElementById("statusRoom");
@@ -104,6 +135,7 @@ function changeStatus() {
         button.classList.add("bg-gray-600");
     }
 }
+
 function setCookie(roomCode, value, daysToExpire) {
     var expires = "";
 
@@ -177,7 +209,38 @@ function setupSocket(dpname,roomCode) {
         const socketUrl = 'ws://localhost:8765';
         const client = new WebSocketClient(socketUrl, roomCode, TempUserName);
         toggleModal(false);
+        return client
     }
+}
+
+function startCountdown(seconds) {
+    var countdownElement = $('#countdown');
+
+    var countdownInterval = setInterval(function() {
+        seconds--;
+
+        countdownElement.text(`${seconds}s`);
+
+        if (seconds <= 0) {
+            countdownElement.text('Time is up!');
+            clearInterval(countdownInterval);           
+        }
+    }, 1000);
+}
+
+function startCountdownStart(seconds) {
+    var countdownElement = $('#countdown');
+
+    var countdownInterval = setInterval(function() {
+        seconds--;
+
+        countdownElement.text(`${seconds}s`);
+
+        if (seconds <= 0) {
+            clearInterval(countdownInterval);
+            countdownElement.text('Start!');
+        }
+    }, 1000);
 }
 
 $(document).ready(function () {
@@ -187,17 +250,3 @@ $(document).ready(function () {
         $(this).addClass("bg-blue");
     });
 });
-function startCountdown(seconds) {
-    var countdownElement = $('#countdown');
-
-    var countdownInterval = setInterval(function() {
-        seconds--;
-
-        countdownElement.text(seconds);
-
-        if (seconds <= 0) {
-            clearInterval(countdownInterval);
-            
-        }
-    }, 1000);
-}

@@ -5,10 +5,17 @@ from .func.verify import Collection
 from django.http import HttpResponse, JsonResponse
 
 def JoinedPage(request,roomCode):  
+    room = Collection.Room_Collection.find_one({"RoomCode": roomCode})
     response = render(request, "crm/client/homepage.html", {"roomCode": roomCode})
+    
+    if room is not None:      
+        if room["Online"] == True:       
+            response = render(request, "crm/client/homepage.html", {"roomCode": roomCode})
+        elif room["Online"] == False:
+            print("phong chua online")
+            response = redirect("joingame")
     return response
 
-    return render(request, "crm/client/signup.html")
 
 def JoinGame(request):
     if request.method == 'POST':

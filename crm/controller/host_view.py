@@ -190,7 +190,8 @@ def CreateGame(request,quizid):
             "isEnd": False,
             "isFull": False,
             "QuizzesId": quizid,
-            "RoomCode": randomNumber
+            "RoomCode": randomNumber,
+            "Online":False
             }
         Collection.Room_Collection.insert_one(newRoom)
         quiz = Collection.Quiz_Collection.find_one({"_id": ObjectId(quizid)})
@@ -200,7 +201,6 @@ def CreateGame(request,quizid):
             "room": newRoom,
             "quizid": quizid
         }   
-    print(context)
     return render(request, 'crm/host/create_game.html',context=context)
     
 
