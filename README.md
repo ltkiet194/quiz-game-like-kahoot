@@ -15,52 +15,38 @@ Django: Khung web Python cấp cao được sử dụng để xây dựng máy c
 WebSocket (C#): Máy chủ WebSocket được triển khai trong C# để xử lý giao tiếp thời gian thực giữa máy chủ và máy khách.
 MongoDB: Cơ sở dữ liệu NoSQL được sử dụng để lưu trữ các câu hỏi trắc nghiệm, dữ liệu phòng và thông tin người dùng.
 
-# Installation
- Clone the Repository:
+## Installation
+Clone the Repository:
 
 git clone https://github.com/ltkiet194/quiz-game-like-kahoot.git
-Navigate to Project Directory:
 
-
+## Navigate to Project Directory:
 cd quiz-game
-Install Dependencies:
+## Install Dependencies:
 
-bash
-Copy code
 pip install -r requirements.txt
-Set Up MongoDB:
+
+## Set Up MongoDB:
 
 Install MongoDB and ensure it's running.
 Configure MongoDB connection settings in Django's settings.py file.
-Run the Application:
-
+## Run the Application:
 python manage.py runserver
-Run WebSocket Server:
+
+## Run Tailwind
+python manage.py tailwind start
+
+## Clone And Run WebSocket Server:
+git clone update later .....
 
 Compile and run the WebSocket server written in C#.
-Ensure the WebSocket server is configured to communicate with the Django backend.
-Usage
-Access the Web Interface:
 
-Open your web browser and navigate to http://localhost:8000 (or the appropriate address if you've configured it differently).
-Create or Join a Room:
 
-Create a new room by providing a unique name and selecting questions.
-Alternatively, join an existing room by entering the room code provided by the host.
-Participate in the Quiz:
+## Access the Web Interface:
 
-Once inside the room, wait for the host to start the quiz.
-Answer the questions presented within the allocated time.
-View Leaderboard:
+In progress .....
 
-After the quiz, view the leaderboard to see your score and the scores of other participants.
-Contributing
-Contributions are welcome! If you'd like to contribute to this project, feel free to fork the repository and submit a pull request with your changes.
-
-License
-This project is licensed under the MIT License. Feel free to use, modify, and distribute it as per the terms of the license.
-
-Acknowledgements
+### Acknowledgements
 Tailwind CSS
 Django
 WebSocket Protocol
@@ -72,8 +58,4 @@ Feel free to reach out to the project maintainers for any questions or feedback!
 
 
 
-## start Server
-python manage.py runserver     
 
-## start Tailwindcss
-python manage.py tailwind start
